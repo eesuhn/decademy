@@ -13,8 +13,8 @@
     "build": "bun run --cwd next-dapp build",
     "start": "bun run --cwd next-dapp start",
     "lint": "bun run --cwd next-dapp lint",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
+    "format": "bun run --cwd next-dapp format",
+    "format:check": "bun run --cwd next-dapp format:check"
   },
   "dependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.8",
