@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.2",
     "@web3auth/auth-adapter": "^9.4.0",
     "@web3auth/base": "^9.4.0",
     "@web3auth/ethereum-provider": "^9.4.0",
@@ -28,6 +30,7 @@
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
+    "react-hook-form": "^7.53.2",
     "react-icons": "^5.3.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
