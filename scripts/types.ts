@@ -3,7 +3,7 @@ export interface DeploymentConfig {
   args?: any[];
   verify?: boolean;
   dependencies?: {
-    [key: string]: string;  // contract name -> deployed address
+    [key: string]: string; // contract name -> deployed address
   };
   proxy?: {
     admin?: string;

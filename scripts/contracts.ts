@@ -5,6 +5,6 @@ export const deploymentContracts: DeploymentConfig[] = [
   {
     contractName: 'SampleContract',
     verify: true,
-    args: ['Hello, Hardhat!']
-  }
+    args: ['Hello, Hardhat!'],
+  },
 ];

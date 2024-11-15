@@ -16,7 +16,7 @@ class ContractDeployer {
 
   /**
    * Get a list of available contracts in the contracts directory
-   * 
+   *
    * @returns List of available contracts in the contracts directory
    */
   static async getAvailableContracts(): Promise<string[]> {
@@ -24,8 +24,8 @@ class ContractDeployer {
     try {
       const files = await fs.promises.readdir(contractsPath);
       return files
-        .filter(file => file.endsWith('.sol'))
-        .map(file => path.parse(file).name);
+        .filter((file) => file.endsWith('.sol'))
+        .map((file) => path.parse(file).name);
     } catch (error) {
       logError(`Error reading contracts directory: ${error}`);
       return [];
@@ -34,25 +34,29 @@ class ContractDeployer {
 
   /**
    * Deploy all contracts in the deployment configuration
-   * 
+   *
    * @returns Map of deployed contract names to their addresses
    */
   async deployAll(): Promise<Map<string, string>> {
     const [deployer] = await ethers.getSigners();
-    const deployerBalance = await deployer.provider.getBalance(deployer.address);
+    const deployerBalance = await deployer.provider.getBalance(
+      deployer.address
+    );
 
     this.logPreDeploymentInfo(deployer.address, deployerBalance);
 
     const availableContracts = await ContractDeployer.getAvailableContracts();
     logInfo('\nAvailable contracts:');
     logInfo('-------------------');
-    availableContracts.forEach(contract => logInfo(`- ${contract}`));
+    availableContracts.forEach((contract) => logInfo(`- ${contract}`));
 
     // Filter configurations to only include available contracts
-    const validConfigs = this.contracts.filter(config => {
+    const validConfigs = this.contracts.filter((config) => {
       const isAvailable = availableContracts.includes(config.contractName);
       if (!isAvailable) {
-        logWarning(`Skipping ${config.contractName} - contract not found in contracts directory`);
+        logWarning(
+          `Skipping ${config.contractName} - contract not found in contracts directory`
+        );
       }
       return isAvailable;
     });
@@ -81,24 +85,28 @@ class ContractDeployer {
 
   /**
    * Deploy a single contract based on the deployment configuration
-   * 
+   *
    * @param config
-   * @returns 
+   * @returns
    */
-  private async deploySingleContract(config: DeploymentConfig): Promise<string> {
+  private async deploySingleContract(
+    config: DeploymentConfig
+  ): Promise<string> {
     const { contractName, args = [], dependencies = {} } = config;
-    
+
     // Replace dependency addresses in constructor args
-    const resolvedArgs = args.map(arg => 
-      typeof arg === 'string' && arg.startsWith('$') 
-        ? this.deployedContracts.get(arg.slice(1)) 
+    const resolvedArgs = args.map((arg) =>
+      typeof arg === 'string' && arg.startsWith('$')
+        ? this.deployedContracts.get(arg.slice(1))
         : arg
     );
 
     // Verify all required dependencies are deployed
     for (const [depName, depAddress] of Object.entries(dependencies)) {
       if (!this.deployedContracts.has(depName)) {
-        throw new Error(`Dependency ${depName} (${depAddress}) not deployed for ${contractName}`);
+        throw new Error(
+          `Dependency ${depName} (${depAddress}) not deployed for ${contractName}`
+        );
       }
     }
 
@@ -123,7 +131,7 @@ class ContractDeployer {
 
   /**
    * Verify a deployed contract on Scan
-   * 
+   *
    * @param address
    * @param constructorArgs
    * @returns
@@ -140,7 +148,7 @@ class ContractDeployer {
     try {
       await run('verify:verify', {
         address,
-        constructorArguments: constructorArgs
+        constructorArguments: constructorArgs,
       });
       logSuccess('Contract verified successfully!');
     } catch (error: any) {
@@ -153,12 +161,14 @@ class ContractDeployer {
    */
   private async waitForConfirmations() {
     logInfo('Waiting for block confirmations...');
-    await new Promise(resolve => setTimeout(resolve, this.blockConfirmationWait));
+    await new Promise((resolve) =>
+      setTimeout(resolve, this.blockConfirmationWait)
+    );
   }
 
   /**
    * Handle verification error
-   * 
+   *
    * @param error
    * @param address
    * @param args
@@ -179,7 +189,7 @@ class ContractDeployer {
 
   /**
    * Get deployment information
-   * 
+   *
    * @param address
    * @returns
    */
@@ -193,19 +203,22 @@ class ContractDeployer {
       network: network.name,
       blockNumber,
       gasPrice: gasPrice ? ethers.formatUnits(gasPrice, 'gwei') : 'unknown',
-      timestamp: block?.timestamp ? new Date(block.timestamp * 1000).toISOString() : 'unknown'
+      timestamp: block?.timestamp
+        ? new Date(block.timestamp * 1000).toISOString()
+        : 'unknown',
     };
   }
 
   /**
    * Log pre-deployment information
-   * 
+   *
    * @param address
    * @param balance
    */
   private logPreDeploymentInfo(address: string, balance: bigint) {
     const chainConfigName = environment.chainConfig?.name || 'unknown';
-    const networkName = network.name === 'localhost' ? 'localhost' : chainConfigName;
+    const networkName =
+      network.name === 'localhost' ? 'localhost' : chainConfigName;
 
     logInfo('\nDeployment configuration:');
     logInfo('------------------------');
@@ -216,7 +229,7 @@ class ContractDeployer {
 
   /**
    * Log deployment information
-   * 
+   *
    * @param contractName
    * @param info
    */
@@ -233,7 +246,10 @@ class ContractDeployer {
  */
 async function main() {
   try {
-    const deployer = new ContractDeployer(environment.blockConfirmations, deploymentContracts);
+    const deployer = new ContractDeployer(
+      environment.blockConfirmations,
+      deploymentContracts
+    );
     const deployedContracts = await deployer.deployAll();
 
     if (deployedContracts.size > 0) {
@@ -252,7 +268,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     logError(error);
     process.exit(1);
   });

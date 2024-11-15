@@ -12,16 +12,21 @@
     "dev": "bun run --cwd next-dapp dev",
     "build": "bun run --cwd next-dapp build",
     "start": "bun run --cwd next-dapp start",
-    "lint": "bun run --cwd next-dapp lint"
+    "lint": "bun run --cwd next-dapp lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "dependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.8",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
     "dotenv": "^16.4.5",
+    "eslint-config-prettier": "^9.1.0",
     "ethers": "^6.13.4",
     "hardhat": "^2.22.15",
+    "prettier": "^3.3.3",
     "typechain": "^8.3.2"
   }
 }

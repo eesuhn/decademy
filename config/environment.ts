@@ -10,7 +10,7 @@ const REQUIRED_CHAIN_FIELDS = [
   'rpcUrl',
   'explorerUrl',
   'explorerApiUrl',
-  'apiKey'
+  'apiKey',
 ] as const;
 
 const getChainConfig = (): ChainConfig | null => {
@@ -20,10 +20,12 @@ const getChainConfig = (): ChainConfig | null => {
     rpcUrl: process.env.RPC_URL,
     explorerUrl: process.env.EXPLORER_URL,
     explorerApiUrl: process.env.EXPLORER_API_URL,
-    apiKey: process.env.EXPLORER_API_KEY
+    apiKey: process.env.EXPLORER_API_KEY,
   };
 
-  const missingFields = REQUIRED_CHAIN_FIELDS.filter(field => !envFields[field]);
+  const missingFields = REQUIRED_CHAIN_FIELDS.filter(
+    (field) => !envFields[field]
+  );
 
   // WIP: Handle missing fields
   if (missingFields.length) {
@@ -32,13 +34,15 @@ const getChainConfig = (): ChainConfig | null => {
 
   return {
     ...envFields,
-    chainId: parseInt(envFields.chainId!)
+    chainId: parseInt(envFields.chainId!),
   } as ChainConfig;
 };
 
 export const environment: EnvironmentConfig = {
   walletPrivateKey: process.env.WALLET_PRIVATE_KEY,
   chainConfig: getChainConfig(),
-  blockConfirmations: parseInt(process.env.BLOCK_CONFIRMATIONS || String(DEFAULT_BLOCK_CONFIRMATIONS)),
-  autoVerify: process.env.AUTO_VERIFY === 'true'
+  blockConfirmations: parseInt(
+    process.env.BLOCK_CONFIRMATIONS || String(DEFAULT_BLOCK_CONFIRMATIONS)
+  ),
+  autoVerify: process.env.AUTO_VERIFY === 'true',
 };

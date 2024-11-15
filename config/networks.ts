@@ -4,7 +4,7 @@ import { logWarning, logError } from '../utils/logger';
 
 const validateDeploymentConfig = (networkName: string = 'unknown'): boolean => {
   const { chainConfig, walletPrivateKey } = environment;
-  
+
   if (networkName === 'localhost') return true;
 
   const errors: string[] = [];
@@ -23,11 +23,15 @@ const validateDeploymentConfig = (networkName: string = 'unknown'): boolean => {
   }
 
   if (warnings.length) {
-    logWarning('Configuration warnings:\n' + warnings.map(w => `- ${w}`).join('\n'));
+    logWarning(
+      'Configuration warnings:\n' + warnings.map((w) => `- ${w}`).join('\n')
+    );
   }
 
   if (errors.length && process.env.npm_lifecycle_event !== 'deploy:local') {
-    logError('Configuration errors:\n' + errors.map(e => `- ${e}`).join('\n'));
+    logError(
+      'Configuration errors:\n' + errors.map((e) => `- ${e}`).join('\n')
+    );
   }
 
   return errors.length === 0;
@@ -36,8 +40,8 @@ const validateDeploymentConfig = (networkName: string = 'unknown'): boolean => {
 const baseNetworkConfig = {
   mining: {
     auto: true,
-    interval: 1000
-  }
+    interval: 1000,
+  },
 };
 
 export const networks: NetworksUserConfig = {
@@ -45,18 +49,19 @@ export const networks: NetworksUserConfig = {
   localhost: {
     ...baseNetworkConfig,
     url: 'http://127.0.0.1:8545',
-    chainId: 31337
+    chainId: 31337,
   },
-  ...(validateDeploymentConfig(environment.chainConfig?.name) && environment.chainConfig && {
-    [environment.chainConfig.name]: {
-      url: environment.chainConfig.rpcUrl,
-      accounts: [environment.walletPrivateKey!],
-      chainId: environment.chainConfig.chainId,
-      verify: {
-        etherscan: {
-          apiKey: environment.chainConfig.apiKey
-        }
-      }
-    }
-  })
+  ...(validateDeploymentConfig(environment.chainConfig?.name) &&
+    environment.chainConfig && {
+      [environment.chainConfig.name]: {
+        url: environment.chainConfig.rpcUrl,
+        accounts: [environment.walletPrivateKey!],
+        chainId: environment.chainConfig.chainId,
+        verify: {
+          etherscan: {
+            apiKey: environment.chainConfig.apiKey,
+          },
+        },
+      },
+    }),
 };
