@@ -1,101 +1,212 @@
+'use client';
+
+import { TopicCarousel } from '@/components/TopicCarousel';
+import { GrayButtonHover } from '@/components/ui/GrayButtonHover';
+import { GreenButtonHover } from '@/components/ui/GreenButtonHover';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
+
+function Section1() {
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-16 md:py-32 relative">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Column */}
+          <div className="space-y-8">
+            <div>
+              <h2
+                className="text-2xl md:text-3xl font-bold mb-4"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
+                Stand a chance to
+              </h2>
+              <h1
+                className="text-5xl md:text-7xl font-black leading-tight tracking-tight mb-6"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
+                Learn For Free!
+              </h1>
+            </div>
+            <p className="text-gray-600 text-lg md:text-xl max-w-xl leading-relaxed">
+              Join our community of learners using our platform to master new
+              skills. Everything you need to grow, all in one place.
+            </p>
+            <div className="flex gap-4">
+              <GreenButtonHover> Sign Up </GreenButtonHover>
+              <GrayButtonHover> Learn More </GrayButtonHover>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="relative mt-12 md:mt-0">
+            <div className="relative w-full h-[400px]">
+              <Image
+                src="/learn-for-free.jpg"
+                alt="Feature illustration"
+                layout="fill"
+                objectFit="contain"
+                className="animate-float"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Section2() {
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-16 md:py-32 relative">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="relative mt-12 md:mt-0">
+            <div className="relative w-full h-[400px]">
+              <Image
+                src="/community.jpg"
+                alt="Community illustration"
+                layout="fill"
+                objectFit="contain"
+                className="animate-float"
+              />
+            </div>
+          </div>
+          <div className="space-y-8">
+            <h2
+              className="text-5xl md:text-6xl font-black leading-tight tracking-tight"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Community Voted Topics
+            </h2>
+            <p className="text-gray-600 text-lg md:text-xl max-w-xl leading-relaxed">
+              Our curriculum is shaped by the community. Vote on what you want
+              to learn next and help others grow together.
+            </p>
+            <GreenButtonHover> Make your own course! </GreenButtonHover>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Section3() {
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-16 md:py-32 relative">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <h2
+              className="text-5xl md:text-6xl font-black leading-tight tracking-tight"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Teach, Earn, and Inspire.
+            </h2>
+            <p className="text-gray-600 text-lg md:text-xl max-w-xl leading-relaxed">
+              Become an educator on our vibrant platform! Create engaging
+              modules on trending topics, share your passion for teaching, and
+              get paid for your expertise.
+            </p>
+            <GreenButtonHover>Learn More</GreenButtonHover>
+          </div>
+          <div className="relative mt-12 md:mt-0">
+            <div className="relative w-full h-[400px]">
+              <Image
+                src="/teach.jpg"
+                alt="teach"
+                layout="fill"
+                objectFit="contain"
+                className="animate-float"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Section4() {
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-16 md:py-32 relative">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="relative mt-12 md:mt-0 order-2 md:order-1">
+            <div className="relative w-full h-[400px]">
+              <Image
+                src="/decentralized.jpg"
+                alt="Decentralized illustration"
+                layout="fill"
+                objectFit="contain"
+                className="animate-float"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-8 order-1 md:order-2">
+            <h2
+              className="text-5xl md:text-6xl font-black leading-tight tracking-tight"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Fully Decentralized.
+            </h2>
+            <p className="text-gray-600 text-lg md:text-xl max-w-xl leading-relaxed">
+              Own your learning journey. Our platform is built on blockchain
+              technology, ensuring your achievements are truly yours.
+            </p>
+            <GreenButtonHover>Learn More</GreenButtonHover>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Add floating animation
+const styles = `
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+`;
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{' '}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [showConfetti, setShowConfetti] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // Optional: Remove confetti after 5 seconds
+    const timer = setTimeout(() => {
+      setShowConfetti(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  return (
+    <>
+      {/* Confetti Overlay */}
+      {showConfetti && (
+        <div className="fixed inset-0 pointer-events-none z-50">
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            recycle={false}
+            numberOfPieces={200}
+            colors={['#80fd82', '#5ad15c', '#1a2b3c', '#ffffff']} // Optional: matching your green button colors
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+
+      <style>{styles}</style>
+      <Section1 />
+      <TopicCarousel />
+      <Section2 />
+      <Section3 />
+      <Section4 />
+    </>
   );
 }
