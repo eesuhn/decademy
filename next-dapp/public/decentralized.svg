@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circles -->
+  <circle cx="400" cy="300" r="180" fill="#E6FAF8" opacity="0.3"/>
+  <circle cx="400" cy="300" r="120" fill="#99F6E4" opacity="0.2"/>
+
+  <!-- Connection lines -->
+  <g stroke="#2DD4BF" stroke-width="2" opacity="0.6">
+    <path d="M400,200 L300,150 M300,150 L200,200" />
+    <path d="M400,200 L500,150 M500,150 L600,200" />
+    <path d="M400,200 L400,400" />
+    <path d="M200,200 L300,450 M300,450 L500,450 M500,450 L600,200" />
+    <path d="M300,150 L500,150" />
+    <path d="M200,200 L600,200" stroke-dasharray="5,5"/>
+    <path d="M300,450 L400,400 M400,400 L500,450" />
+  </g>
+
+  <!-- Main nodes -->
+  <g fill="#2DD4BF">
+    <!-- Center node -->
+    <circle cx="400" cy="200" r="20"/>
+    <circle cx="400" cy="200" r="25" fill="none" stroke="#2DD4BF" opacity="0.3">
+      <animate attributeName="r" from="25" to="35" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" from="0.3" to="0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Surrounding nodes -->
+    <circle cx="200" cy="200" r="15"/>
+    <circle cx="600" cy="200" r="15"/>
+    <circle cx="300" cy="150" r="15"/>
+    <circle cx="500" cy="150" r="15"/>
+    <circle cx="400" cy="400" r="15"/>
+    <circle cx="300" cy="450" r="15"/>
+    <circle cx="500" cy="450" r="15"/>
+  </g>
+
+  <!-- Pulse animations for smaller nodes -->
+  <g fill="none" stroke="#2DD4BF" opacity="0.3">
+    <circle cx="200" cy="200" r="20">
+      <animate attributeName="r" from="20" to="25" dur="2s" repeatCount="indefinite" begin="0.2s"/>
+      <animate attributeName="opacity" from="0.3" to="0" dur="2s" repeatCount="indefinite" begin="0.2s"/>
+    </circle>
+    <circle cx="600" cy="200" r="20">
+      <animate attributeName="r" from="20" to="25" dur="2s" repeatCount="indefinite" begin="0.4s"/>
+      <animate attributeName="opacity" from="0.3" to="0" dur="2s" repeatCount="indefinite" begin="0.4s"/>
+    </circle>
+    <circle cx="400" cy="400" r="20">
+      <animate attributeName="r" from="20" to="25" dur="2s" repeatCount="indefinite" begin="0.6s"/>
+      <animate attributeName="opacity" from="0.3" to="0" dur="2s" repeatCount="indefinite" begin="0.6s"/>
+    </circle>
+  </g>
+
+  <!-- Small connecting dots -->
+  <g fill="#2DD4BF" opacity="0.5">
+    <circle cx="350" cy="300" r="4"/>
+    <circle cx="450" cy="300" r="4"/>
+    <circle cx="375" cy="350" r="4"/>
+    <circle cx="425" cy="350" r="4"/>
+  </g>
+</svg>
