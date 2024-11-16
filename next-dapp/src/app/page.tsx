@@ -1,5 +1,6 @@
 'use client';
 
+import Navbar from '@/components/Navbar';
 import { TopicCarousel } from '@/components/TopicCarousel';
 import { GrayButtonHover } from '@/components/ui/GrayButtonHover';
 import { GreenButtonHover } from '@/components/ui/GreenButtonHover';
@@ -188,6 +189,7 @@ export default function Home() {
   }, []);
   return (
     <>
+      <Navbar />
       {/* Confetti Overlay */}
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50">

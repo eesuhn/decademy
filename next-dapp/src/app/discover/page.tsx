@@ -9,6 +9,7 @@ import { useWeb3Auth } from '@/hooks/useWeb3Auth';
 import { useEmitAddUserToTopic } from '@/hooks/useEmitAddUserToTopic';
 import { useStake } from '@/hooks/useStake';
 import { StakePromptModal } from '@/components/StakePromptModal';
+import Navbar from '@/components/Navbar';
 
 export default function DiscoverTopics() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -127,39 +128,42 @@ export default function DiscoverTopics() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Trending Section */}
-      <div className="mb-12">
-        <h1 className="text-3xl font-bold mb-8">Trending Topics</h1>
-        <TopicConveyor
-          topics={fetchedData}
-          onTopicClick={openStakeModal}
-          isModalOpen={isModalOpen}
-          userWalletAddr={userWalletAddress}
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        {/* Trending Section */}
+        <div className="mb-12">
+          <h1 className="text-3xl font-bold mb-8">Trending Topics</h1>
+          <TopicConveyor
+            topics={fetchedData}
+            onTopicClick={openStakeModal}
+            isModalOpen={isModalOpen}
+            userWalletAddr={userWalletAddress}
+          />
+        </div>
+
+        {/* Discover Section */}
+        <div>
+          <h1 className="text-3xl font-bold mb-8">Discover Topics</h1>
+          <TopicGrid topics={fetchedData} onTopicClick={openStakeModal} />
+        </div>
+
+        {/* Stake Modal */}
+        <StakePromptModal
+          isOpen={isStakeModalOpen}
+          onClose={closeStakeModal}
+          moduleTitle={pendingTopic?.title || ''}
+          stakeAmount={randomizePoolAmount()}
+          onStakeSuccess={handleStakeSuccess}
+        />
+
+        <ModulesModal
+          isOpen={isModalOpen}
+          onClose={closeStakeModal}
+          topic={selectedTopic}
+          userWalletAddress={userWalletAddress}
         />
       </div>
-
-      {/* Discover Section */}
-      <div>
-        <h1 className="text-3xl font-bold mb-8">Discover Topics</h1>
-        <TopicGrid topics={fetchedData} onTopicClick={openStakeModal} />
-      </div>
-
-      {/* Stake Modal */}
-      <StakePromptModal
-        isOpen={isStakeModalOpen}
-        onClose={closeStakeModal}
-        moduleTitle={pendingTopic?.title || ''}
-        stakeAmount={randomizePoolAmount()}
-        onStakeSuccess={handleStakeSuccess}
-      />
-
-      <ModulesModal
-        isOpen={isModalOpen}
-        onClose={closeStakeModal}
-        topic={selectedTopic}
-        userWalletAddress={userWalletAddress}
-      />
-    </div>
+    </>
   );
 }
