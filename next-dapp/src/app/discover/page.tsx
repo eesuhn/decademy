@@ -53,7 +53,7 @@ export default function DiscoverTopics() {
             body: JSON.stringify({
               query: `
               query GetDiscoveryData {
-                topics(where: {attested: true}, first: 20) {
+                topics(first: 20) {
                   id
                   learnerInvolved
                   description
