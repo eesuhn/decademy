@@ -6,18 +6,30 @@ import TopicConveyor from '@/components/GraphTopicCarouselDiscover';
 import { ModulesModal } from '@/components/GraphModulesModal';
 import TopicGrid from '@/components/GraphTopicGrid';
 import { useWeb3Auth } from '@/hooks/useWeb3Auth';
+import { useEmitAddUserToTopic } from '@/hooks/useEmitAddUserToTopic';
 
 export default function DiscoverTopics() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<GraphTopic | null>(null);
-
+  const { emitAddUserToTopic } = useEmitAddUserToTopic();
   const [fetchedData, setFetchedData] = useState<GraphTopic[] | null>(null);
   const { getPublicAddr, loading } = useWeb3Auth();
   const [userWalletAddress, setUserWalletAddress] = useState('');
 
-  const openModal = (topic: GraphTopic) => {
+  const openModal = async (topic: GraphTopic) => {
     setSelectedTopic(topic);
-    setModalOpen(true);
+    // await stake(2);
+    if (topic.id !== undefined) {
+      const result = await emitAddUserToTopic(parseInt(topic.id, 16));
+      if (result === true) {
+        console.log('User added to topic');
+        setModalOpen(true);
+      } else {
+        console.log('No modules available for this topic');
+      }
+    } else {
+      console.log('Topic ID is undefined');
+    }
   };
 
   const closeModal = () => {

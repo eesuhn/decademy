@@ -42,7 +42,8 @@ export const useSubmitTopic = (): SubmitTopicHookReturn => {
       );
 
       // Initialize the relayer contract
-      const privateKey = process.env.NEXT_PUBLIC_RELAYER_HOLDER_PRIVATE_KEY as string;
+      const privateKey = process.env
+        .NEXT_PUBLIC_RELAYER_HOLDER_PRIVATE_KEY as string;
       const relayerSigner = new ethers.Wallet(privateKey, web3Provider);
       const relayerContract = new ethers.Contract(
         config.RELAYER_CONTRACT_ADDRESS,

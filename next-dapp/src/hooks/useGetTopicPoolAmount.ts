@@ -27,8 +27,8 @@ export const useGetTopicPoolAmount = (): GetTopicPoolAmountResponse => {
       );
 
       const contractAbi = process.env.NEXT_PUBLIC_CONTRACT_ABI;
-      const privateKey =
-        process.env.NEXT_PUBLIC_RELAYER_HOLDER_PRIVATE_KEY as string;
+      const privateKey = process.env
+        .NEXT_PUBLIC_RELAYER_HOLDER_PRIVATE_KEY as string;
       const signer = new ethers.Wallet(privateKey, web3Provider);
       const contract = new ethers.Contract(
         contractAddress,
