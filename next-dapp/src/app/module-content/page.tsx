@@ -84,7 +84,7 @@ export default function LearningPage() {
             />
           ) : (
             <ChapterContent
-              content={currentContent}
+              content={currentContent} // ERROR: Might not work here
               currentChapter={currentChapter}
               totalChapters={totalChapters}
               onNext={nextChapter}
