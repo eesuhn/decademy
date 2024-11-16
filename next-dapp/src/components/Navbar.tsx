@@ -5,6 +5,7 @@ import { SVGProps } from 'react';
 import { UserNav } from '@/components/UserNav';
 import Image from 'next/image';
 import WorldIdButton from './WorldIdButton';
+import Web3AuthBtn from './Web3AuthBtn';
 
 const links = [
   { name: 'Home', href: '/' },
@@ -51,6 +52,7 @@ export default function Navbar() {
           </Link>
         ))}
         <WorldIdButton />
+        <Web3AuthBtn />
         <div className="ml-[20px] mt-[6px]">
           <UserNav
             walletAddress="0xf2b5BfE0c6e9D2e04B896F0f8030931d92421D87"

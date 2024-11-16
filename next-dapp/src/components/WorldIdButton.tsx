@@ -35,7 +35,7 @@ export default function WorldIdButton() {
             variant={verified ? 'outline' : 'default'}
             className="text-black inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-base font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50"
           >
-            {verified ? 'Verified' : 'Verify with World ID'}
+            {verified ? 'Verified' : 'World ID'}
           </Button>
         )}
       </IDKitWidget>
