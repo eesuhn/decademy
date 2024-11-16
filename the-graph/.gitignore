@@ -1,0 +1,7 @@
+# Graph CLI generated artifacts
+build/
+generated/
+
+# Docker generated volume 
+data/
+

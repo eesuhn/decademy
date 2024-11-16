@@ -1,0 +1,55 @@
+type User @entity {
+  id:           ID!
+  name:         String!
+  socialLinks:  [String!]!
+  isVerified:   Boolean!
+  learnerData:  Learner
+  educatorData: Educator
+}
+
+type Learner @entity {
+  id:             ID!
+  user:           User!
+  topicsJoined:   [Topic!]!
+  modulesJoined:  [Module!]!
+  progress:       [LearnerProgress!]! @derivedFrom(field: "learner")
+}
+
+type Educator @entity {
+  id:               ID!
+  user:             User!
+  topicsJoined:     [Topic!]!
+  modulesCreated:   [Module!]! @derivedFrom(field: "educator")
+}
+
+type Topic @entity {
+  id:                 ID!
+  modules:            [Module!]! @derivedFrom(field: "topic")
+  educatorsInvolved:  [Educator!]! @derivedFrom(field: "topicsJoined")
+  learnerInvolved:    BigInt!
+  title:              String!
+  description:        String!
+  topicIMG:           String!
+  attested:           Boolean!
+}
+
+type Module @entity {
+  id:               ID!
+  educator:         Educator!
+  topic:            Topic!
+  learnerInvolved:  [Learner!]! @derivedFrom(field: "modulesJoined")
+  feedbacks:        [LearnerProgress!]! @derivedFrom(field: "module")
+  title:            String!
+  totalPages:       Int!
+  description:      String!
+  moduleIMG:        String!
+}
+
+type LearnerProgress @entity {
+  id:           ID!
+  learner:      Learner!
+  module:       Module!
+  topic:        Topic!
+  currentPage:  Int!
+  rating:       Int!
+}

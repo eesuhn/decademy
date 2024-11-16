@@ -1,0 +1,47 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: GraphTest
+    network: testnet
+    source:
+      address: "0x6035e2454476c9E595DDaABaF97b64eDEDe8eE50"
+      abi: GraphTest
+      startBlock: 7306671
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User 
+        - Learner 
+        - Educator
+        - Topic
+        - Module
+        - LearnerProgress
+      abis:
+        - name: GraphTest
+          file: ./abis/GraphTest.json
+      eventHandlers:
+        - event: createUser(address,string,string[],bool)
+          handler: handleCreateUser
+        - event: createEducator(address)
+          handler: handleCreateEducator
+        - event: createTopic(uint256,string,string,string,bool)
+          handler: handleCreateTopic
+        - event: createModule(indexed address,indexed uint256,indexed uint256,uint256,string,string,string)
+          handler: handleCreateModule
+        - event: learnerJoinTopic(address,uint256)
+          handler: handleLearnerJoinTopic
+        - event: learnerJoinModule(address,uint256)
+          handler: handleLearnerJoinModule
+        - event: updateLearnerProgress(indexed address,indexed uint256,uint256,uint256)
+          handler: handleUpdateLearnerProgress
+        - event: updateWorldIdStatus(indexed address)
+          handler: handleUpdateWorldIdStatus
+        - event: updateTopicAttestationStatus(indexed uint256,bool)
+          handler: handleUpdateTopicAttestationStatus
+      file: ./src/graph-test.ts

@@ -1,0 +1,22 @@
+{
+  "name": "the-graph",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ testing",
+    "create-local": "graph create --node http://localhost:8020/ testing",
+    "remove-local": "graph remove --node http://localhost:8020/ testing",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 testing",
+    "test": "graph test",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.87.0",
+    "@graphprotocol/graph-ts": "^0.35.1",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3"
+  }
+}
