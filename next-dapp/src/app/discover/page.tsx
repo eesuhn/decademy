@@ -7,6 +7,8 @@ import { ModulesModal } from '@/components/GraphModulesModal';
 import TopicGrid from '@/components/GraphTopicGrid';
 import { useWeb3Auth } from '@/hooks/useWeb3Auth';
 import { useEmitAddUserToTopic } from '@/hooks/useEmitAddUserToTopic';
+import { useStake } from '@/hooks/useStake';
+import { StakePromptModal } from '@/components/StakePromptModal';
 
 export default function DiscoverTopics() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -15,24 +17,49 @@ export default function DiscoverTopics() {
   const [fetchedData, setFetchedData] = useState<GraphTopic[] | null>(null);
   const { getPublicAddr, loading } = useWeb3Auth();
   const [userWalletAddress, setUserWalletAddress] = useState('');
+  const [isStakeModalOpen, setStakeModalOpen] = useState(false);
+  const [pendingTopic, setPendingTopic] = useState<GraphTopic | null>(null);
+  const { stake } = useStake();
 
-  const openModal = async (topic: GraphTopic) => {
-    setSelectedTopic(topic);
-    // await stake(2);
-    if (topic.id !== undefined) {
-      const result = await emitAddUserToTopic(parseInt(topic.id, 16));
-      if (result === true) {
-        console.log('User added to topic');
-        setModalOpen(true);
-      } else {
-        console.log('No modules available for this topic');
+  const openStakeModal = (topic: GraphTopic) => {
+    setPendingTopic(topic);
+    setStakeModalOpen(true);
+  };
+
+  const handleStakeSuccess = async () => {
+    if (!pendingTopic) return;
+
+    try {
+      // First attempt to stake
+      if (pendingTopic.id !== undefined) {
+        await stake(parseInt(pendingTopic.id, 16));
       }
-    } else {
-      console.log('Topic ID is undefined');
+
+      // If staking is successful, then emit add user to topic
+      if (pendingTopic.id !== undefined) {
+        const result = await emitAddUserToTopic(parseInt(pendingTopic.id, 16));
+        if (result === true) {
+          console.log('User added to topic successfully');
+          setSelectedTopic(pendingTopic);
+          setModalOpen(true);
+        } else {
+          console.log('Failed to add user to topic');
+        }
+      }
+    } catch (error) {
+      console.error('Error in staking process:', error);
+    } finally {
+      setStakeModalOpen(false);
+      setPendingTopic(null);
     }
   };
 
-  const closeModal = () => {
+  const closeStakeModal = () => {
+    setStakeModalOpen(false);
+    setPendingTopic(null);
+  };
+
+  const closeModulesModal = () => {
     setModalOpen(false);
     setSelectedTopic(null);
   };
@@ -95,6 +122,10 @@ export default function DiscoverTopics() {
     fetchData();
   }, [loading]);
 
+  const randomizePoolAmount = () => {
+    return Math.random() * 0.1 + 0.01;
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Trending Section */}
@@ -102,7 +133,7 @@ export default function DiscoverTopics() {
         <h1 className="text-3xl font-bold mb-8">Trending Topics</h1>
         <TopicConveyor
           topics={fetchedData}
-          onTopicClick={openModal}
+          onTopicClick={openStakeModal}
           isModalOpen={isModalOpen}
           userWalletAddr={userWalletAddress}
         />
@@ -111,12 +142,21 @@ export default function DiscoverTopics() {
       {/* Discover Section */}
       <div>
         <h1 className="text-3xl font-bold mb-8">Discover Topics</h1>
-        <TopicGrid topics={fetchedData} onTopicClick={openModal} />
+        <TopicGrid topics={fetchedData} onTopicClick={openStakeModal} />
       </div>
+
+      {/* Stake Modal */}
+      <StakePromptModal
+        isOpen={isStakeModalOpen}
+        onClose={closeStakeModal}
+        moduleTitle={pendingTopic?.title || ''}
+        stakeAmount={randomizePoolAmount()}
+        onStakeSuccess={handleStakeSuccess}
+      />
 
       <ModulesModal
         isOpen={isModalOpen}
-        onClose={closeModal}
+        onClose={closeStakeModal}
         topic={selectedTopic}
         userWalletAddress={userWalletAddress}
       />
