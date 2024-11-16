@@ -111,9 +111,9 @@ export default function Profile() {
 
   const handleEducatorButton = () => {
     if (userData?.educatorData !== null) {
-      router.push('/educator-profile');
+      router.push('/profile/educator');
     } else {
-      router.push('/become-educator');
+      router.push('/profile/educator');
     }
   };
 
