@@ -17,17 +17,24 @@
     "format:check": "bun run --cwd next-dapp format:check"
   },
   "dependencies": {
+    "@ethsign/sign-protocol-evm": "^1.1.1",
+    "@google/generative-ai": "^0.21.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.8",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@pushprotocol/restapi": "^1.7.29",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "dotenv": "^16.4.5",
     "eslint-config-prettier": "^9.1.0",
     "ethers": "^6.13.4",
     "hardhat": "^2.22.15",
     "prettier": "^3.3.3",
     "react-confetti": "^6.1.0",
-    "typechain": "^8.3.2"
+    "typechain": "^8.3.2",
+    "sonner": "^1.7.0"
   }
 }
