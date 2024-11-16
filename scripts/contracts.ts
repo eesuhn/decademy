@@ -6,7 +6,8 @@ dotenv.config();
 export const deploymentContracts: DeploymentConfig[] = [
   {
     contractName: 'GraphTest',
-    verify: true
+    verify: true,
+    args: [process.env.SIGN_PROTOCOL_ADDRESS, process.env.SIGN_PROTOCOL_SCHEMA_ID],
   },
   // {
   //   contractName: 'TopicAttestorRelayer',
