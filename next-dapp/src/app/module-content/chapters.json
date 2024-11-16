@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction to Web Development",
+    "content": {
+      "elements": [
+        {
+          "type": "title",
+          "value": "What is Web Development?"
+        },
+        {
+          "type": "subtitle",
+          "value": "Understanding the Fundamentals"
+        },
+        {
+          "type": "paragraph",
+          "value": "Web development is the process of creating websites and web applications for the internet or intranet. It encompasses a range of tasks, including web design, web content development, client-side/server-side scripting, and network security configuration. Web developers use various programming languages and frameworks to build dynamic and interactive user experiences."
+        },
+        {
+          "type": "image",
+          "value": "/web-development-intro.jpg"
+        },
+        {
+          "type": "paragraph",
+          "value": "In this chapter, we will discuss the various components of web development, including front-end and back-end development, and the technologies that power the web. By the end of this chapter, you will have a solid understanding of what web development entails and the skills required to become a successful web developer."
+        },
+        {
+          "type": "codeBlock",
+          "value": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My First Web Page</title>\n</head>\n<body>\n    <h1>Welcome to Web Development!</h1>\n    <p>This is my first web page.</p>\n</body>\n</html>\n```"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "title": "Front-End Development",
+    "content": {
+      "elements": [
+        {
+          "type": "title",
+          "value": "Creating Engaging User Interfaces"
+        },
+        {
+          "type": "subtitle",
+          "value": "HTML, CSS, and JavaScript"
+        },
+        {
+          "type": "paragraph",
+          "value": "Front-end development focuses on the client side of web applications, which is everything that users see and interact with in their web browsers. The core technologies used in front-end development are HTML (HyperText Markup Language), CSS (Cascading Style Sheets), and JavaScript. HTML structures the content, CSS styles it, and JavaScript adds interactivity. Together, these technologies create a seamless user experience."
+        },
+        {
+          "type": "codeBlock",
+          "value": "```javascript\nconst express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n    res.send('Hello World!');\n});\n\napp.listen(port, () => {\n    console.log(`Server running at http://localhost:${port}`);\n});\n```"
+        },
+        {
+          "type": "image",
+          "value": "/frontend-development.jpg"
+        },
+        {
+          "type": "paragraph",
+          "value": "In this chapter, we will delve deeper into each of these technologies. You will learn how to create responsive layouts with CSS, enhance user interactions with JavaScript, and utilize frameworks such as React or Vue.js to build modern web applications. By the end of this chapter, you will be equipped with the foundational skills to create visually appealing and functional web pages."
+        },
+        {
+          "type": "codeBlock",
+          "value": "```javascript\n// Example of a simple JavaScript function\nfunction greet() {\n    alert('Hello, welcome to web development!');\n}\ngreet();\n```"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "title": "Back-End Development",
+    "content": {
+      "elements": [
+        {
+          "type": "title",
+          "value": "Building the Server-Side Logic"
+        },
+        {
+          "type": "subtitle",
+          "value": "Server, Database, and APIs"
+        },
+        {
+          "type": "paragraph",
+          "value": "Back-end development involves server-side logic and database interactions that power web applications. It is responsible for managing user connections, storing and retrieving data, and ensuring that everything on the front end works seamlessly. Back-end developers typically work with server-side languages such as Node.js, Python, Ruby, or PHP, and they often use databases like MySQL, PostgreSQL, or MongoDB to manage data."
+        },
+        {
+          "type": "codeBlock",
+          "value": "```javascript\nconst express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n    res.send('Hello World!');\n});\n\napp.listen(port, () => {\n    console.log(`Server running at http://localhost:${port}`);\n});\n```"
+        },
+        {
+          "type": "image",
+          "value": "/backend-development.webp"
+        },
+        {
+          "type": "paragraph",
+          "value": "In this chapter, we will explore how to set up a server, create RESTful APIs, and connect to databases. You will learn about frameworks like Express.js for Node"
+        },
+        {
+          "type": "codeBlock",
+          "value": "```javascript\nconst express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n    res.send('Hello World!');\n});\n\napp.listen(port, () => {\n    console.log(`Server running at http://localhost:${port}`);\n});\n```"
+        }
+      ]
+    }
+  }
+]

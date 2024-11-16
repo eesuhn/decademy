@@ -1,0 +1,24 @@
+[
+  {
+    "question": "Which of the following statements best describes the concept of 'gas' in Ethereum smart contracts?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Gas is a measure of the computational work required to execute operations on the Ethereum network."
+      },
+      {
+        "id": "B",
+        "text": "Gas refers to the amount of Ether required to deploy a smart contract."
+      },
+      {
+        "id": "C",
+        "text": "Gas is a type of cryptocurrency used exclusively for transaction fees."
+      },
+      {
+        "id": "D",
+        "text": "Gas is the term used for the storage space allocated to a smart contract on the blockchain."
+      }
+    ],
+    "correctAnswer": "A"
+  }
+]
