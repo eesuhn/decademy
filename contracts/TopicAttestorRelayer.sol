@@ -75,4 +75,98 @@ contract TopicAttestorRelayer is Ownable {
             revert("Transaction failed");
         }
     }
+
+    function metaTxEmitAddUserToTopic(
+        address user,
+        address walletAddr,
+        uint256 topicId,
+        bytes memory signature
+    ) external onlyRelayer {
+        require(address(msg.sender).balance >= 0.001 ether, "Relayer: Low balance");
+        bytes memory encodedParams = abi.encode(walletAddr, topicId);
+        bytes32 messageHash = keccak256(abi.encodePacked(user, encodedParams, nonces[user]));
+        bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
+        require(SignatureChecker.isValidSignatureNow(user, ethSignedMessageHash, signature), "Invalid signature");
+        nonces[user]++;
+        try graphTest.emitAddUserToTopic(walletAddr, topicId) {
+        } catch {
+            revert("Transaction failed");
+        }
+    }
+
+    function metaTxVerifyCurrentUser(
+        address user,
+        bytes memory signature
+    ) external onlyRelayer {
+        require(address(msg.sender).balance >= 0.001 ether, "Relayer: Low balance");
+        bytes32 messageHash = keccak256(abi.encodePacked(user, nonces[user]));
+        bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
+        require(SignatureChecker.isValidSignatureNow(user, ethSignedMessageHash, signature), "Invalid signature");
+        nonces[user]++;
+        try graphTest.emitVerifyWorldID(user) {
+        } catch {
+            revert("Transaction failed");
+        }
+    }
+
+    function metaTxEmitCreateUser(
+        address user,
+        address walletAddr,
+        string memory name,
+        string[] memory socials,
+        bytes memory signature
+    ) external onlyRelayer {
+        require(address(msg.sender).balance >= 0.001 ether, "Relayer: Low balance");
+        bytes memory encodedParams = abi.encode(walletAddr, name, socials);
+        bytes32 messageHash = keccak256(abi.encodePacked(user, encodedParams, nonces[user]));
+        bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
+        require(SignatureChecker.isValidSignatureNow(user, ethSignedMessageHash, signature), "Invalid signature");
+        nonces[user]++;
+        try graphTest.emitCreateUser(walletAddr, name, socials) {
+        } catch {
+            revert("Transaction failed");
+        }
+    }
+
+    function metaTxEmitCreateModule(
+        address user,
+        uint256 topicId,
+        address eduWalletAddr,
+        uint256 totalPages,
+        string memory title,
+        string memory description,
+        string memory moduleIMG,
+        bytes memory signature
+    ) external onlyRelayer {
+        require(address(msg.sender).balance >= 0.001 ether, "Relayer: Low balance");
+        bytes memory encodedParams = abi.encode(topicId, eduWalletAddr, totalPages, title, description, moduleIMG);
+        bytes32 messageHash = keccak256(abi.encodePacked(user, encodedParams, nonces[user]));
+        bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
+        require(SignatureChecker.isValidSignatureNow(user, ethSignedMessageHash, signature), "Invalid signature");
+        nonces[user]++;
+        try graphTest.emitCreateModule(topicId, eduWalletAddr, totalPages, title, description, moduleIMG) {
+        } catch {
+            revert("Transaction failed");
+        }
+    }
+
+    function metaTxEmitUpdateLearnerProgress(
+        address user,
+        address walletAddr,
+        uint256 moduleId,
+        uint256 pageAmount,
+        uint256 rating,
+        bytes memory signature
+    ) external onlyRelayer {
+        require(address(msg.sender).balance >= 0.001 ether, "Relayer: Low balance");
+        bytes memory encodedParams = abi.encode(walletAddr, moduleId, pageAmount, rating);
+        bytes32 messageHash = keccak256(abi.encodePacked(user, encodedParams, nonces[user]));
+        bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
+        require(SignatureChecker.isValidSignatureNow(user, ethSignedMessageHash, signature), "Invalid signature");
+        nonces[user]++;
+        try graphTest.emitUpdateLearnerProgress(walletAddr, moduleId, pageAmount, rating) {
+        } catch {
+            revert("Transaction failed");
+        }
+    }
 }
