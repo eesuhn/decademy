@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { SVGProps } from 'react';
 import { UserNav } from '@/components/UserNav';
 import Image from 'next/image';
+import WorldIdButton from './WorldIdButton';
 
 const links = [
   { name: 'Home', href: '/' },
@@ -49,6 +50,7 @@ export default function Navbar() {
             {link.name}
           </Link>
         ))}
+        <WorldIdButton />
         <div className="ml-[20px] mt-[6px]">
           <UserNav
             walletAddress="0xf2b5BfE0c6e9D2e04B896F0f8030931d92421D87"
