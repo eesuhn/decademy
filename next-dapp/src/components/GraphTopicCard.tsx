@@ -7,10 +7,12 @@ import Image from 'next/image';
 import { ethers } from 'ethers';
 import { GraphTopicCardProps } from '@/components/types/discoverType';
 import { useGetTopicPoolAmount } from '@/hooks/useGetTopicPoolAmount';
+import { usePicsumImage } from '@/hooks/usePicsumImage';
 
 export function TopicCard({ topic, onClick }: GraphTopicCardProps) {
   const [ethAmount, setEthAmount] = useState('');
   const { getTopicPoolAmount } = useGetTopicPoolAmount();
+  const { picsumImage, isImageLoading } = usePicsumImage();
 
   useEffect(() => {
     const gettingPoolAmount = async () => {
@@ -25,13 +27,19 @@ export function TopicCard({ topic, onClick }: GraphTopicCardProps) {
   return (
     <Card onClick={onClick} className="w-full max-w-sm cursor-pointer">
       <CardHeader>
-        <Image
-          alt={topic.title || 'empty'}
-          src={'/' + topic.topicIMG}
-          width={250}
-          height={150}
-          className="w-full h-48 object-cover rounded-t-lg"
-        />
+        {isImageLoading ? (
+          <p className="text-center">Loading image...</p>
+        ) : picsumImage ? (
+          <img
+            src={picsumImage}
+            alt="Random Picsum Image"
+            className="w-full max-h-50 max-w-50 object-cover rounded-lg"
+            width={250}
+            height={150}
+          />
+        ) : (
+          <p className="text-center">No image available</p>
+        )}
       </CardHeader>
       <CardContent>
         <CardTitle className="mb-2">{topic.title}</CardTitle>

@@ -205,7 +205,6 @@ export default function Home() {
 
       <style>{styles}</style>
       <Section1 />
-      <TopicCarousel />
       <Section2 />
       <Section3 />
       <Section4 />
