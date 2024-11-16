@@ -33,11 +33,11 @@ export function ModuleCompletionCard({
 
       console.log(`Successfully submitted rating: ${rating}`);
       setTimeout(() => {
-        router.push('/discover-new');
+        router.push('/discover');
       }, 2000);
       console.log(`Successfully submitted rating: ${rating}`);
       setTimeout(() => {
-        router.push('/discover-new');
+        router.push('/discover');
       }, 2000);
     } catch (error) {
       console.error('Error submitting rating:', error);

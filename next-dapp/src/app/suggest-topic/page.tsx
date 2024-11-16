@@ -45,7 +45,7 @@ export default function SuggestTopicForm() {
         title: 'Submission successful',
         description: 'Your topic has been suggested.',
       });
-      router.push('/discover-new');
+      router.push('/discover');
     } catch (error) {
       console.error('Error submitting topic:', error);
       toast({

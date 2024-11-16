@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { TopicCarousel } from '@/components/GraphTopicCarouselProfile';
 import { useWeb3Auth } from '@/hooks/useWeb3Auth';
+import Navbar from '@/components/Navbar';
 
 // Define an array of background colors for cards
 const cardColors = [
@@ -131,70 +132,73 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Column - Profile Info */}
-        <div className="space-y-6">
-          {/* Add margin top to bring header down */}
-          <div className="mt-8">
-            <ProfileHeader
-              walletAddress={userData?.id || ''}
-              name={userData?.name || ''}
-              socialLinks={[
-                { platform: 'twitter', url: 'https://twitter.com/john_doe' },
-                { platform: 'github', url: 'https://github.com/johndoe' },
-              ]}
-            />
-          </div>
-
-          {/* Dashboard Action */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-gray-800">
-                Learner Dashboard
-              </h2>
-              <Button
-                variant="default"
-                onClick={handleEducatorButton}
-                className="transition-all duration-200 hover:scale-105 bg-gray-600 hover:bg-gray-700 rounded-full"
-              >
-                {userData?.educatorData !== null
-                  ? 'Go to Educator Profile'
-                  : 'Become an Educator'}
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column - Topics with custom scroll */}
-        <div className="h-full">
-          <div className="bg-white rounded-3xl shadow-sm h-[calc(100vh-4rem)]">
-            <div className="p-6 border-b">
-              <div className="flex justify-between items-center">
-                <h3 className="text-xl font-semibold">Topics Joined</h3>
-                {/* <Button variant="outline" size="sm" className="rounded-full">
-                  Filter by
-                </Button> */}
-              </div>
-            </div>
-
-            {/* Scrollable content */}
-            <div className="p-6">
-              <TopicCarousel
-                topics={userData?.learnerData?.topicsJoined}
-                onTopicClick={openModal}
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gray-50 p-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Left Column - Profile Info */}
+          <div className="space-y-6">
+            {/* Add margin top to bring header down */}
+            <div className="mt-8">
+              <ProfileHeader
+                walletAddress={userData?.id || ''}
+                name={userData?.name || ''}
+                socialLinks={[
+                  { platform: 'twitter', url: 'https://twitter.com/john_doe' },
+                  { platform: 'github', url: 'https://github.com/johndoe' },
+                ]}
               />
             </div>
+
+            {/* Dashboard Action */}
+            <div className="bg-white rounded-3xl p-6 shadow-sm">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-bold text-gray-800">
+                  Learner Dashboard
+                </h2>
+                <Button
+                  variant="default"
+                  onClick={handleEducatorButton}
+                  className="transition-all duration-200 hover:scale-105 bg-gray-600 hover:bg-gray-700 rounded-full"
+                >
+                  {userData?.educatorData !== null
+                    ? 'Go to Educator Profile'
+                    : 'Become an Educator'}
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Topics with custom scroll */}
+          <div className="h-full">
+            <div className="bg-white rounded-3xl shadow-sm h-[calc(100vh-4rem)]">
+              <div className="p-6 border-b">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-xl font-semibold">Topics Joined</h3>
+                  {/* <Button variant="outline" size="sm" className="rounded-full">
+                  Filter by
+                </Button> */}
+                </div>
+              </div>
+
+              {/* Scrollable content */}
+              <div className="p-6">
+                <TopicCarousel
+                  topics={userData?.learnerData?.topicsJoined}
+                  onTopicClick={openModal}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <ModulesModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        topic={selectedTopic}
-        userWalletAddress={userPublicAddress}
-      />
-    </div>
+        <ModulesModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          topic={selectedTopic}
+          userWalletAddress={userPublicAddress}
+        />
+      </div>
+    </>
   );
 }
