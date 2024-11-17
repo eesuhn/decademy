@@ -1,8 +1,8 @@
-# Decademy <img src="./doc/logo.png" alt="logo" width="20" />
+# Decademy <img src="./doc/logo.svg" alt="logo" width="20" />
 
 A community-driven academy where people define the trends for education. <br>
 
-<img src="./doc/cover.png" alt="cover" width="460" /> <br>
+<img src="./doc/cover.jpg" alt="cover" width="460" /> <br>
 
 Decademy is a **community-driven**, decentralized learning platform that gives learners the power to *vote* on the topics they want to study, while enabling educators to *create content* based on community's need and preference.
 
@@ -24,7 +24,7 @@ TopicAttestorRelayer.sol
 *`CA. = Contract Address`* <br>
 *`BE. = Block Explorer`*
 
-### Sign Protocol
+### Sign Protocol Testnet
 ```
 SchemaId: 0x6b
 Link: https://testnet-scan.sign.global/schema/onchain_evm_534351_0x6b
