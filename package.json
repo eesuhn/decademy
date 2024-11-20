@@ -13,7 +13,7 @@
     "build": "bun run --cwd next-dapp build",
     "start": "bun run --cwd next-dapp start",
     "lint": "bun run --cwd next-dapp lint",
-    "format": "bun run --cwd next-dapp format",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" && bun run --cwd next-dapp format",
     "format:check": "bun run --cwd next-dapp format:check"
   },
   "dependencies": {
